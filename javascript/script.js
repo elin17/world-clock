@@ -12,16 +12,16 @@ function updateTime() {
     );
   }
 
-  // Melbourne
+  // Zurich
 
-  let melbourneElement = document.querySelector("#melbourne");
-  if (melbourneElement) {
-    let melbourneDateElement = melbourneElement.querySelector(".date");
-    let melbourneTimeElement = melbourneElement.querySelector(".time");
-    let melbourneTime = moment().tz("Australia/Melbourne");
+  let zurichElement = document.querySelector("#zurich");
+  if (zurichElement) {
+    let zurichDateElement = zurichElement.querySelector(".date");
+    let zurichTimeElement = zurichElement.querySelector(".time");
+    let zurichTime = moment().tz("Europe/Zurich");
 
-    melbourneDateElement.innerHTML = melbourneTime.format("MMMM Do YYYY");
-    melbourneTimeElement.innerHTML = melbourneTime.format(
+    zurichDateElement.innerHTML = zurichTime.format("MMMM Do YYYY");
+    zurichTimeElement.innerHTML = zurichTime.format(
       "h:mm:ss [<small>]:SSS A[</small]"
     );
   }
@@ -29,6 +29,9 @@ function updateTime() {
 
 function updateCity(event) {
   let cityTimeZone = event.target.value;
+  if (cityTimeZone === "current") {
+    cityTimeZone = moment.tz.guess();
+  }
   let cityName = cityTimeZone.replace("_", " ").split("/")[1];
   let cityTime = moment().tz(cityTimeZone);
   let cityElement = document.querySelector("#cities");
@@ -39,7 +42,7 @@ function updateCity(event) {
           </div>
           <div class="time">${cityTime.format(
             "h:mm:ss"
-          )} <small>${cityTime.format(":SSS A")}</small></div>
+          )} <small>${cityTime.format("A")}</small></div>
         </div>`;
 }
 
